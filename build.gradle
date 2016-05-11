@@ -1,0 +1,43 @@
+plugins {
+    id "us.kirchmeier.capsule" version "1.0-rc1"
+    id "com.wiredforcode.spawn" version "0.6.0"
+}
+
+apply plugin: "com.wiredforcode.spawn"
+apply plugin: "us.kirchmeier.capsule"
+
+group 'HystrixExample'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+import com.wiredforcode.gradle.spawn.SpawnProcessTask
+import com.wiredforcode.gradle.spawn.KillProcessTask
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    dropwizardVersion = "0.9.2"
+}
+
+dependencies {
+    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-client:$dropwizardVersion"
+}
+
+task startServer(group: "Exec", description: 'Starts the reward service in the background', type: SpawnProcessTask, dependsOn: 'createCapsule') {
+    command "java -jar ${projectDir}/build/libs/hystrix-example-service-capsule.jar server ${projectDir}/config/local.yml"
+    ready 'org.eclipse.jetty.server.Server: Started'
+    directory "."
+}
+
+task stopServer(group: "Exec", description: "Kills the running reward service", type: KillProcessTask) {
+    directory "."
+}
+
+task createCapsule(group: "Build", description: "Builds the capsule for hystrix example service", type: FatCapsule, dependsOn: 'build') {
+    applicationClass 'com.hystrix.Main'
+}

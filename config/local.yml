@@ -1,0 +1,3 @@
+slowServer:
+  url: http://localhost:9001/slowService
+  timeout: 2000
