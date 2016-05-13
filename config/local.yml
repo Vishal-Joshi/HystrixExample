@@ -12,3 +12,10 @@ server:
 slowServer:
   url: http://localhost:9001/slowService
   timeout: 2000
+
+httpClient:
+  maxConnections: 5
+  maxConnectionsPerRoute: 5
+  keepAlive: 30s
+  retries: 0
+  gzipEnabledForRequests: false

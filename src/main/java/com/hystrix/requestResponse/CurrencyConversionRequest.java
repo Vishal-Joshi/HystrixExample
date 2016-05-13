@@ -1,4 +1,4 @@
-package com.hystrix.request;
+package com.hystrix.requestResponse;
 
 public class CurrencyConversionRequest {
 
