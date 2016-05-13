@@ -18,6 +18,6 @@ public class Main extends Application<HystrixExampleConfiguration> {
         System.out.println(String.format("url: %s", configuration.getSlowServer().getUrl()));
         ServiceLocatorUtilities.bind(new DependencyMapper());
         JerseyEnvironment jersey = environment.jersey();
-        jersey.packages("com.hystrix.resource");
+        jersey.packages("com.hystrix");
     }
 }

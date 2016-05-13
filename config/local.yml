@@ -1,3 +1,14 @@
+server:
+  adminContextPath: /
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 5000
+  adminConnectors:
+    - type: http
+      port: 5001
+
+
 slowServer:
   url: http://localhost:9001/slowService
   timeout: 2000
