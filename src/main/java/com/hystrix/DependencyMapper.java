@@ -3,7 +3,6 @@ package com.hystrix;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.hystrix.readers.InboundCurrencyRequestReader;
 import com.hystrix.resource.CurrencyConversionResource;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
@@ -17,6 +16,5 @@ public class DependencyMapper extends AbstractBinder {
 
         bind(mapper).to(ObjectMapper.class);
         bindAsContract(CurrencyConversionResource.class);
-        bindAsContract(InboundCurrencyRequestReader.class);
     }
 }
