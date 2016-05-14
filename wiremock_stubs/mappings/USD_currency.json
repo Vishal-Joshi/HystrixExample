@@ -9,6 +9,7 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "body": "{\"rate\":52, \"currency\":\"USD\"}"
+    "body": "{\"rate\":52, \"currency\":\"USD\"}",
+    "fixedDelayMilliseconds": 1000
   }
 }

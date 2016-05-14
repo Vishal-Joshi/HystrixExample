@@ -14,6 +14,7 @@ slowServer:
   timeout: 2000
 
 httpClient:
+  timeout: 2000ms
   maxConnections: 5
   maxConnectionsPerRoute: 5
   keepAlive: 30s

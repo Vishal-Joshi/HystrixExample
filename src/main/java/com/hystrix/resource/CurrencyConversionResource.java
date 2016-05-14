@@ -7,11 +7,9 @@ import com.hystrix.thirdparty.SlowServerClient;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.net.SocketTimeoutException;
 
 @Service
 @Path("currency")
@@ -28,7 +26,15 @@ public class CurrencyConversionResource {
     @Produces("application/json")
     @Consumes("application/json")
     public Response convertCurrency(CurrencyConversionRequest request){
-        CurrencyConversionResponse response = new CurrencyConversionResponse(client.getCurrentCurrencyConversionRate(request.getCurrency()).getRate()*request.getAmount(), request.getCurrency(), request.getAmount());
-        return Response.status(Response.Status.OK).entity(response).build();
+        CurrencyConversionResponse response;
+        try{
+            response = new CurrencyConversionResponse(client.getCurrentCurrencyConversionRate(request.getCurrency()).getRate()*request.getAmount(), request.getCurrency(), request.getAmount());
+            return Response.status(Response.Status.OK).entity(response).build();
+        } catch(Exception exception){
+            if(exception instanceof NotFoundException){
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            return Response.status(Response.Status.BAD_GATEWAY).build();
+        }
     }
 }

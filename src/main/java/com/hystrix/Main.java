@@ -23,7 +23,7 @@ public class Main extends Application<HystrixExampleConfiguration> {
         Client client = new JerseyClientBuilder(environment).using(configuration.getHttpClient()).build("slowServerClient");
         ServiceLocator serviceLocator = ServiceLocatorUtilities.bind(new DependencyMapper(client, configuration));
         JerseyEnvironment jersey = environment.jersey();
-        jersey.packages("com.hystrix","com.hystrix.thirdparty");
+        jersey.packages("com.hystrix");
         Set<Class<?>> classes = jersey.getResourceConfig().getClasses();
         classes.stream().map(p -> serviceLocator.getService(p))
                 .filter(Objects::nonNull)
