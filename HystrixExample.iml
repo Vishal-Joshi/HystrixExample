@@ -100,5 +100,6 @@
     <orderEntry type="library" exported="" name="Gradle: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Gradle: com.netflix.hystrix:hystrix-core:1.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.netflix.hystrix:hystrix-metrics-event-stream:1.5.2" level="project" />
   </component>
 </module>

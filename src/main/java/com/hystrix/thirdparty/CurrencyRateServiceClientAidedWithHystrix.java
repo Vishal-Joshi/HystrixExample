@@ -1,6 +1,6 @@
 package com.hystrix.thirdparty;
 
-import com.hystrix.hystrix.GetCurrencyRateCommand;
+import com.hystrix.hystrixCommands.GetCurrencyRateCommand;
 import com.hystrix.requestResponse.ConversionRateResponse;
 
 import javax.inject.Inject;

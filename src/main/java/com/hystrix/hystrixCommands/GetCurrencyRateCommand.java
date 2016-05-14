@@ -1,4 +1,4 @@
-package com.hystrix.hystrix;
+package com.hystrix.hystrixCommands;
 
 import com.hystrix.requestResponse.ConversionRateResponse;
 import com.netflix.hystrix.HystrixCommand;
