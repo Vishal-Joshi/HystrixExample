@@ -2,7 +2,10 @@ package com.hystrix;
 
 import com.hystrix.config.HystrixExampleConfiguration;
 import com.hystrix.resource.CurrencyConversionResource;
-import com.hystrix.thirdparty.SlowServerClient;
+import com.hystrix.resource.CurrencyConversionResourceAidedWithHystrix;
+import com.hystrix.thirdparty.CurrencyRateServiceClient;
+import com.hystrix.thirdparty.CurrencyRateServiceClientWithoutHystrix;
+import com.hystrix.thirdparty.CurrencyRateServiceClientAidedWithHystrix;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.ws.rs.client.Client;
@@ -19,15 +22,11 @@ public class DependencyMapper extends AbstractBinder {
 
     @Override
     protected void configure() {
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.disable(SerializationFeature.WRITE_NULL_MAP_VALUES);
-//        mapper.disable(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS);
-//        mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, false);
-//
-//        bind(mapper).to(ObjectMapper.class);
         bind(slowServerHttpClient).to(Client.class);
         bind(applicationConfig.getSlowServer().getUrl()).named("slowServerUrl").to(String.class);
-        bindAsContract(SlowServerClient.class);
+        bind(CurrencyRateServiceClientWithoutHystrix.class).to(CurrencyRateServiceClient.class).named("clientWithNoHystrixAid");
+        bind(CurrencyRateServiceClientAidedWithHystrix.class).to(CurrencyRateServiceClient.class).named("clientWithHystrixAid");
         bindAsContract(CurrencyConversionResource.class);
+        bindAsContract(CurrencyConversionResourceAidedWithHystrix.class);
     }
 }

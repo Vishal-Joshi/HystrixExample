@@ -21,11 +21,13 @@ repositories {
 
 ext {
     dropwizardVersion = "0.9.2"
+    hystrixVersion = "1.5.2"
 }
 
 dependencies {
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
     compile "io.dropwizard:dropwizard-client:$dropwizardVersion"
+    compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: hystrixVersion
 }
 
 task startServer(group: "Exec", description: 'Starts the reward service in the background', type: SpawnProcessTask, dependsOn: 'createCapsule') {

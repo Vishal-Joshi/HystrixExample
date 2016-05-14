@@ -1,6 +1,5 @@
 package com.hystrix.resource;
 
-
 import com.hystrix.requestResponse.CurrencyConversionRequest;
 import com.hystrix.requestResponse.CurrencyConversionResponse;
 import com.hystrix.thirdparty.CurrencyRateServiceClient;
@@ -12,13 +11,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Service
-@Path("currency")
-public class CurrencyConversionResource {
-
+@Path("currencyWithHystrix")
+public class CurrencyConversionResourceAidedWithHystrix {
     private CurrencyRateServiceClient client;
 
     @Inject
-    public CurrencyConversionResource(@Named("clientWithNoHystrixAid") CurrencyRateServiceClient client){
+    public CurrencyConversionResourceAidedWithHystrix(@Named("clientWithHystrixAid") CurrencyRateServiceClient client){
         this.client = client;
     }
 

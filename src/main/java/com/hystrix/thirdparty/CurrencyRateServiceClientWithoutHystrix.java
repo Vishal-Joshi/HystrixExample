@@ -9,12 +9,12 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 @Service
-public class SlowServerClient {
+public class CurrencyRateServiceClientWithoutHystrix implements CurrencyRateServiceClient {
 
     private WebTarget target;
 
     @Inject
-    public SlowServerClient(Client httpClient, @Named("slowServerUrl") String slowServerUrl){
+    public CurrencyRateServiceClientWithoutHystrix(Client httpClient, @Named("slowServerUrl") String slowServerUrl){
         target = httpClient.target(slowServerUrl);
     }
 
