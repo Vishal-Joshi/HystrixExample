@@ -28,6 +28,7 @@ dependencies {
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
     compile "io.dropwizard:dropwizard-client:$dropwizardVersion"
     compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: hystrixVersion
+    compile group: 'com.netflix.hystrix', name: 'hystrix-metrics-event-stream', version: hystrixVersion
 }
 
 task startServer(group: "Exec", description: 'Starts the reward service in the background', type: SpawnProcessTask, dependsOn: 'createCapsule') {

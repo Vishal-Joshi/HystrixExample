@@ -106,5 +106,6 @@
     <orderEntry type="library" exported="" name="Gradle: commons-configuration:commons-configuration:1.8" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-logging:commons-logging:1.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.netflix.hystrix:hystrix-metrics-event-stream:1.5.2" level="project" />
   </component>
 </module>

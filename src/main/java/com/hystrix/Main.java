@@ -28,5 +28,6 @@ public class Main extends Application<HystrixExampleConfiguration> {
         classes.stream().map(p -> serviceLocator.getService(p))
                 .filter(Objects::nonNull)
                 .forEach(jersey::register);
+        environment.getApplicationContext().addServlet("com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet", "/hystrix.stream");
     }
 }
