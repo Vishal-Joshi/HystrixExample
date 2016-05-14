@@ -5,9 +5,12 @@ import io.dropwizard.Application;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Environment;
+import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 
 import javax.ws.rs.client.Client;
+import java.util.Objects;
+import java.util.Set;
 
 public class Main extends Application<HystrixExampleConfiguration> {
 
@@ -18,10 +21,12 @@ public class Main extends Application<HystrixExampleConfiguration> {
     @Override
     public void run(HystrixExampleConfiguration configuration, Environment environment) throws Exception {
         Client client = new JerseyClientBuilder(environment).using(configuration.getHttpClient()).build("slowServerClient");
-        System.out.println(String.format("timeout: %d", configuration.getSlowServer().getTimeout()));
-        System.out.println(String.format("url: %s", configuration.getSlowServer().getUrl()));
-        ServiceLocatorUtilities.bind(new DependencyMapper(client, configuration));
+        ServiceLocator serviceLocator = ServiceLocatorUtilities.bind(new DependencyMapper(client, configuration));
         JerseyEnvironment jersey = environment.jersey();
-        jersey.packages("com.hystrix");
+        jersey.packages("com.hystrix","com.hystrix.thirdparty");
+        Set<Class<?>> classes = jersey.getResourceConfig().getClasses();
+        classes.stream().map(p -> serviceLocator.getService(p))
+                .filter(Objects::nonNull)
+                .forEach(jersey::register);
     }
 }

@@ -27,7 +27,6 @@ public class CurrencyConversionResource {
     @Produces("application/json")
     @Consumes("application/json")
     public Response convertCurrency(CurrencyConversionRequest request){
-        System.out.print(client.getCurrentCurrencyConversionRate(request.getCurrency()).getRate()*request.getAmount());
-        return Response.status(Response.Status.OK).build();
+        return Response.status(Response.Status.OK).entity(client.getCurrentCurrencyConversionRate(request.getCurrency()).getRate()*request.getAmount()).build();
     }
 }

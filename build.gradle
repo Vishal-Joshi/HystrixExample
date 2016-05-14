@@ -41,3 +41,13 @@ task stopServer(group: "Exec", description: "Kills the running reward service", 
 task createCapsule(group: "Build", description: "Builds the capsule for hystrix example service", type: FatCapsule, dependsOn: 'build') {
     applicationClass 'com.hystrix.Main'
 }
+
+task startStubServer(group: "Exec", description: 'Starts the currency stub server in the background', type: SpawnProcessTask) {
+    command "java -jar ${projectDir}/wiremock_stubs/wiremock-1.57-standalone.jar --root-dir ${projectDir}/wiremock_stubs"
+    ready 'verbose:                      false'
+    directory "$projectDir/wiremock_stubs"
+}
+
+task stopStubServer(group: "Exec", description: "Kills the running currency conversion stub", type: KillProcessTask) {
+    directory "$projectDir/wiremock_stubs"
+}

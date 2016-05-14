@@ -10,7 +10,7 @@ server:
 
 
 slowServer:
-  url: http://localhost:9001/slowService
+  url: http://localhost:8080/slowService
   timeout: 2000
 
 httpClient:
