@@ -2,6 +2,7 @@ package com.hystrix.resource;
 
 
 import com.hystrix.requestResponse.CurrencyConversionRequest;
+import com.hystrix.requestResponse.CurrencyConversionResponse;
 import com.hystrix.thirdparty.SlowServerClient;
 import org.jvnet.hk2.annotations.Service;
 
@@ -27,6 +28,7 @@ public class CurrencyConversionResource {
     @Produces("application/json")
     @Consumes("application/json")
     public Response convertCurrency(CurrencyConversionRequest request){
-        return Response.status(Response.Status.OK).entity(client.getCurrentCurrencyConversionRate(request.getCurrency()).getRate()*request.getAmount()).build();
+        CurrencyConversionResponse response = new CurrencyConversionResponse(client.getCurrentCurrencyConversionRate(request.getCurrency()).getRate()*request.getAmount(), request.getCurrency(), request.getAmount());
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 }
