@@ -19,3 +19,11 @@ This is a small example demonstrate the use of Hystrix for third party dependenc
 
 ## How to stop stub server
 ./gradlew stopStubServer
+
+## Hystrix Dashboard
+Hystrix dashboard is a separate application that consumes hystrix event stream emitted from the application(Hystrix Example) and show the graph with current state of circuit.
+ # Starting Hystrix dashboard
+  * Add the hystrix dashboard war placed under ${projectDir}/dashboard to a tomcat container under /webapps.
+  * Start tomcat and goto http://localhost:7979
+  * Add the hystrix event stream of the application which is http://{hostname}:{port}/currencyConversionService/hystrix.stream to dashboard.
+  * Click on 'Monitor Streams' button.
