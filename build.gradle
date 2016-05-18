@@ -32,7 +32,7 @@ dependencies {
 }
 
 task startServer(group: "Exec", description: 'Starts the reward service in the background', type: SpawnProcessTask, dependsOn: 'createCapsule') {
-    command "java -jar ${projectDir}/build/libs/hystrix-example-service-capsule.jar server ${projectDir}/config/local.yml"
+    command "java -Darchaius.configurationSource.additionalUrls=file://${projectDir}/config/hystrix.properties -Darchaius.fixedDelayPollingScheduler.delayMills=1000 -Darchaius.fixedDelayPollingScheduler.initialDelayMills=1000 -jar ${projectDir}/build/libs/hystrix-example-service-capsule.jar server ${projectDir}/config/local.yml"
     ready 'org.eclipse.jetty.server.Server: Started'
     directory "."
 }

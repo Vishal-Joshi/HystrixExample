@@ -1,6 +1,6 @@
 server:
   adminContextPath: /
-  applicationContextPath: /
+  applicationContextPath: /currencyConversionService
   applicationConnectors:
     - type: http
       port: 5000
